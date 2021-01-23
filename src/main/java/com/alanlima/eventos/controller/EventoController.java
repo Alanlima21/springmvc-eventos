@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +34,14 @@ public class EventoController {
 		ModelAndView mv = new ModelAndView("index");
 		List<Evento> list = service.findAll();
 		mv.addObject("eventos", list);
+		return mv;
+	}
+	
+	@RequestMapping("/{id}")
+	public ModelAndView findById(@PathVariable Integer id) {
+		Evento obj = service.findById(id);
+		ModelAndView mv = new ModelAndView("evento/detalhesEvento");
+		mv.addObject("evento", obj);
 		return mv;
 	}
 }

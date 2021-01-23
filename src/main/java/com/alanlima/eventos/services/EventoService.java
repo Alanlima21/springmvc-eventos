@@ -26,4 +26,9 @@ public class EventoService {
 		List<Evento> list = repo.findAll();
 		return list;
 	}
+	
+	public Evento findById(Integer id) {
+		Evento obj = repo.findById(id).orElse(null);
+		return obj;
+	}
 }
