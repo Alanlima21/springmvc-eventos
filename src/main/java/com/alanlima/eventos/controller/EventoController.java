@@ -18,7 +18,7 @@ public class EventoController {
 	@Autowired
 	private EventoService service;
 	
-	@RequestMapping(value = "/cadastrarEvento", method = RequestMethod.GET)
+	@RequestMapping(value = "/cadastrarEvento")
 	public String findAll() {
 		return "evento/formEvento";
 	}

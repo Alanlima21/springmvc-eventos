@@ -1,40 +1,35 @@
 package com.alanlima.eventos.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Evento implements Serializable{
+public class Convidado implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String local;
-	private String data;
-	private String horario;
-	
-	@OneToMany(mappedBy = "evento")
-	private List<Convidado> convidados = new ArrayList<>();
+  	@Column(unique = true)
+	private String rg;
+  	@ManyToOne
+  	private Evento evento;
 
-	public Evento() {
+	public Convidado() {
 	}
 
-	public Evento(Integer id, String nome, String local, String data, String horario) {
+	public Convidado(Integer id, String nome, String rg) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.local = local;
-		this.data = data;
-		this.horario = horario;
+		this.rg = rg;
 	}
 
 	public Integer getId() {
@@ -53,32 +48,20 @@ public class Evento implements Serializable{
 		this.nome = nome;
 	}
 
-	public String getLocal() {
-		return local;
+	public String getRg() {
+		return rg;
 	}
 
-	public void setLocal(String local) {
-		this.local = local;
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public String getHorario() {
-		return horario;
-	}
-
-	public void setHorario(String horario) {
-		this.horario = horario;
+	public void setRg(String rg) {
+		this.rg = rg;
 	}
 	
-	public List<Convidado> getConvidados() {
-		return convidados;
+	public Evento getEvento() {
+		return evento;
+	}
+	
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 	@Override
@@ -97,7 +80,7 @@ public class Evento implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Evento other = (Evento) obj;
+		Convidado other = (Convidado) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
