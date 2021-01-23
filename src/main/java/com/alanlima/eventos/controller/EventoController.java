@@ -1,9 +1,12 @@
 package com.alanlima.eventos.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alanlima.eventos.entities.Evento;
 import com.alanlima.eventos.services.EventoService;
@@ -23,5 +26,13 @@ public class EventoController {
 	public String insert(Evento obj) {
 		obj = service.insert(obj);
 		return "redirect:/cadastrarEvento";
+	}
+	
+	@RequestMapping(value = "/eventos", method = RequestMethod.GET)
+	public ModelAndView findAllEventos(){
+		ModelAndView mv = new ModelAndView("index");
+		List<Evento> list = service.findAll();
+		mv.addObject("eventos", list);
+		return mv;
 	}
 }
