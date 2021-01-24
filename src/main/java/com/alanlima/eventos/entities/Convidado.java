@@ -25,11 +25,12 @@ public class Convidado implements Serializable {
 	public Convidado() {
 	}
 
-	public Convidado(Integer id, String nome, String rg) {
+	public Convidado(Integer id, String nome, String rg, Evento evento) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.rg = rg;
+		this.evento = evento;
 	}
 
 	public Integer getId() {

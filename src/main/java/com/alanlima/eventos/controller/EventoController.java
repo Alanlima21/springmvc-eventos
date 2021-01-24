@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alanlima.eventos.entities.Convidado;
 import com.alanlima.eventos.entities.Evento;
+import com.alanlima.eventos.services.ConvidadoService;
 import com.alanlima.eventos.services.EventoService;
 
 @Controller
@@ -17,6 +19,8 @@ public class EventoController {
 
 	@Autowired
 	private EventoService service;
+	@Autowired
+	private ConvidadoService convidadoService;
 	
 	@RequestMapping(value = "/cadastrarEvento")
 	public String findAll() {
@@ -37,11 +41,17 @@ public class EventoController {
 		return mv;
 	}
 	
-	@RequestMapping("/{id}")
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
 	public ModelAndView findById(@PathVariable Integer id) {
 		Evento obj = service.findById(id);
 		ModelAndView mv = new ModelAndView("evento/detalhesEvento");
 		mv.addObject("evento", obj);
 		return mv;
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.POST)
+	public String insert(@PathVariable Integer id , Convidado convidado) {
+		convidadoService.insert(convidado, id);
+		return "redirect:/{id}";
 	}
 }
