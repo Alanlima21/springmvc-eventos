@@ -46,6 +46,8 @@ public class EventoController {
 		Evento obj = service.findById(id);
 		ModelAndView mv = new ModelAndView("evento/detalhesEvento");
 		mv.addObject("evento", obj);
+		List<Convidado> list = convidadoService.findAllByEvento(id);
+		mv.addObject("convidados", list);
 		return mv;
 	}
 	
