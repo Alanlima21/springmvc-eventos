@@ -39,7 +39,13 @@ public class EventoController {
 			RedirectAttributes atributos) {
 		if (result.hasErrors()) {
 			ModelAndView mv = new ModelAndView("redirect:/cadastrarEvento");
-			atributos.addFlashAttribute("mensagem", "Verifique os campos!");
+			List<String> msg = new ArrayList<>();
+			for(ObjectError erro : result.getAllErrors()) {
+				msg.add(erro.getDefaultMessage());
+			}
+			for(String ms : msg) {
+				atributos.addFlashAttribute("mensagem", ms);
+			}
 			return mv;
 		}
 		obj = service.insert(obj);
@@ -71,7 +77,13 @@ public class EventoController {
 			RedirectAttributes atributos) {
 		if (result.hasErrors()) {
 			ModelAndView mv = new ModelAndView("redirect:/{id}");
-			atributos.addFlashAttribute("mensagem", "Verifique os campos!");
+			List<String> msg = new ArrayList<>();
+			for(ObjectError erro : result.getAllErrors()) {
+				msg.add(erro.getDefaultMessage());
+			}
+			for(String ms : msg) {
+				atributos.addFlashAttribute("mensagem", ms);
+			}
 			return mv;
 		}
 		ModelAndView mv = new ModelAndView("redirect:/{id}");

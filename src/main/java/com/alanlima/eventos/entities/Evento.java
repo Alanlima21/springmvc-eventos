@@ -18,13 +18,13 @@ public class Evento implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@NotEmpty
+	@NotEmpty(message = "Campo nome não pode ser vazio")
 	private String nome;
-	@NotEmpty
+	@NotEmpty(message = "Local não pode ser vazio")
 	private String local;
-	@NotEmpty
+	@NotEmpty(message = "Data não pode ser vazia")
 	private String data;
-	@NotEmpty
+	@NotEmpty(message = "Horario não pode ser vazio")
 	private String horario;
 	
 	@OneToMany(mappedBy = "evento")
