@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Convidado implements Serializable {
@@ -16,8 +17,10 @@ public class Convidado implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotEmpty(message = "Campo Nome não pode ser vazio")
 	private String nome;
   	@Column(unique = true)
+  	@NotEmpty(message = "Campo RG não pode ser vazio")
 	private String rg;
   	@ManyToOne
   	private Evento evento;
