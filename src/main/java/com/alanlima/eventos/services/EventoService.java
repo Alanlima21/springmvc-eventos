@@ -31,4 +31,11 @@ public class EventoService {
 		Evento obj = repo.findById(id).orElse(null);
 		return obj;
 	}
+	
+	public void delete(Integer id) {
+		Evento evento = findById(id);
+		if(evento != null) {
+			repo.delete(evento);
+		}
+	}
 }

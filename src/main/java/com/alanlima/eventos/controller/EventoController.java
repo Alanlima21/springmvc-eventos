@@ -71,7 +71,24 @@ public class EventoController {
 		mv.addObject("convidados", list);
 		return mv;
 	}
-
+	
+	@RequestMapping("/deleteEvento")
+	public ModelAndView delete(Integer id) {
+		service.delete(id);
+		ModelAndView mv = new ModelAndView("redirect:/eventos");
+		return mv;
+	}
+	
+	@RequestMapping("/deleteConvidado")
+	public ModelAndView deleteConvidado(Integer cod) {
+		Convidado obj = convidadoService.findById(cod);
+		convidadoService.delete(cod);
+		Evento evento = obj.getEvento();
+		Integer id = evento.getId();
+		ModelAndView mv = new ModelAndView("redirect:/"+id);
+		return mv;
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public ModelAndView insert(@PathVariable Integer id, @Valid Convidado convidado, BindingResult result,
 			RedirectAttributes atributos) {

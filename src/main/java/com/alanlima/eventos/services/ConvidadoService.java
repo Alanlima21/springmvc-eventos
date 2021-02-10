@@ -17,17 +17,30 @@ public class ConvidadoService {
 	private ConvidadoRepository repo;
 	@Autowired
 	private EventoService service;
-	
-	public List<Convidado> findAllByEvento(Integer id){
+
+	public List<Convidado> findAllByEvento(Integer id) {
 		List<Convidado> list = repo.findByEventoId(id);
 		return list;
 	}
-	
+
 	@Transactional
 	public Convidado insert(Convidado obj, Integer id) {
 		Evento evento = service.findById(id);
 		Convidado convidado = new Convidado(null, obj.getNome(), obj.getRg(), evento);
 		convidado = repo.save(convidado);
 		return convidado;
+	}
+
+	
+	public Convidado findById(Integer id) {
+		Convidado obj = repo.findById(id).orElse(null);
+		return obj;
+	}
+
+	public void delete(Integer id) {
+		Convidado obj = findById(id);
+		if(obj != null) {
+			repo.delete(obj);
+		}
 	}
 }

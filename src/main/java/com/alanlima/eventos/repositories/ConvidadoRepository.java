@@ -11,4 +11,5 @@ import com.alanlima.eventos.entities.Convidado;
 public interface ConvidadoRepository extends JpaRepository<Convidado, Integer> {
 
 	List<Convidado> findByEventoId(Integer id);
+
 }
